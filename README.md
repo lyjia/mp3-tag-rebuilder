@@ -4,10 +4,10 @@ MP3TagRebuilder is a python script designed to fix a very specific type of corru
 
 This particular defect somehow prevents Serato from saving track, key, and BPM analyses to the MP3's ID3 header. When this happens, Serato will seemingly analyze the MP3 file perfectly fine, but then when it is reloaded, analysis isn't present (notice how the track preview fills in slowly from left-to-right, as opposed to appearing instantly), and the data in the BPM and Key columns revert to the previous values provided by Beatport.
 
-This script has some additional features that I have added, that enhance my own personal music intake workflow:
+This script has some additional features that I have added, which are not necessary but enhance my own personal music intake workflow:
 
-* `--convert-key` will convert the musical key notation that Beatport provides into a certain medieval-themed key notation system. You know the one I'm talking about, it has the rainbow wheel that we've all seen. With this switch, "Fmaj" is instead written as "7B"
-* `--strip-ufid` will strip the UFID field from the rebuilding process
+* `--convert-key` will convert the musical key notation that Beatport provides into a certain medieval-themed key notation system. You know the one I'm talking about, it has the rainbow wheel that we've all seen. With this switch, "Fmaj" is instead written as "7B". This is useful if you want to play these files on older CDJs (like CDJ-2000s) or another DJ system that displays the KEY tag but doesn't actually interpret them.
+* `--strip-ufid` will strip the UFID field from the rebuilding process.
 
 ## WARNING!
 
@@ -36,6 +36,8 @@ The `--help` switch prints a detailed command-line reference.
 To rebuild the tags for a single file, run the following:
 
 `python mp3-tag-rebuilder.py /path/to/a_file.mp3`, replacing "/path/to/a_file.mp3" with your own file path.
+
+If there is a space in the file path, don't forget to enclose it in quotes! For example: `python mp3-tag-rebuilder.py "G:\temp\testmedialibrary\13199930_Stutter_(Original Mix).mp3"`
 
 ## Note About Tracks Already Imported to Serato
 
