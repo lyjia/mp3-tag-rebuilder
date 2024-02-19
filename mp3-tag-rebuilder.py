@@ -47,17 +47,19 @@ def rebuild_id3_tags(file_path, convert_keys=False, strip_pii=False):
     new_tags = ID3()
 
     for tag, value in audio.tags.items():
-        # Directly add the frame to the new tag
-        log(f"Copying {tag}: {str(value)[:64]}")
-
         if convert_keys:
-            pass
+            if tag=='TKEY' and value.text[0] in medieval_system_inverse:
+                newval = medieval_system_inverse[value.text[0]]
+                log(f"Converting {tag}: {value.text[0]} --> {newval}...")
+                value.text = [newval]
 
         if strip_pii:
             if tag=="UFID":
-                log(f"Stripping {tag}")
+                log(f"Stripping {tag}...")
                 continue
 
+        # Directly add the frame to the new tag
+        log(f"Copying {tag}: {str(value)[:64]}")
         new_tags.add(value)
 
     audio.delete()  # Remove existing tags
