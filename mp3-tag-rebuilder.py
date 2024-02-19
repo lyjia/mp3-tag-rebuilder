@@ -1,4 +1,4 @@
-import argparse
+import argparse, os, glob
 from mutagen.id3 import ID3, error, ID3NoHeaderError
 from mutagen.mp3 import MP3
 
@@ -37,9 +37,22 @@ def log(msg):
     print(msg)
 
 
+def get_mp3_files(path):
+    if os.path.isfile(path):
+        return [path]
+    elif os.path.isdir(path):
+        mp3_files = glob.glob(os.path.join(path, '*.mp3'))
+        log(f"Processing folder {path} containing {len(mp3_files)} file(s)...")
+        return mp3_files
+    else:
+        print(f"Path {path} does not exist!")
+        exit -1
+
+
 def rebuild_id3_tags(file_path, convert_keys=False, strip_ufid=False):
     try:
         audio = MP3(file_path, ID3=ID3)
+        log(f"Processing file {file_path}...")
     except ID3NoHeaderError:
         log(f"No ID3 tag found in {file_path}")
         return
@@ -48,13 +61,13 @@ def rebuild_id3_tags(file_path, convert_keys=False, strip_ufid=False):
 
     for tag, value in audio.tags.items():
         if convert_keys:
-            if tag=='TKEY' and value.text[0] in medieval_system_inverse:
+            if tag == 'TKEY' and value.text[0] in medieval_system_inverse:
                 newval = medieval_system_inverse[value.text[0]]
                 log(f"Converting {tag}: {value.text[0]} --> {newval}...")
                 value.text = [newval]
 
         if strip_ufid:
-            if tag=="UFID":
+            if tag == "UFID":
                 log(f"Stripping {tag}...")
                 continue
 
@@ -68,19 +81,21 @@ def rebuild_id3_tags(file_path, convert_keys=False, strip_ufid=False):
 
     audio.tags = new_tags  # Assign new tags
     audio.save()  # Save the changes
-    log(f"ID3 tags successfully rebuilt for {file_path}")
+    log(f"ID3 tags rebuilt for {file_path}")
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=f"Rebuild ID3 tags of an MP3 file. (Version {VERSION})")
-    parser.add_argument('file_path', type=str, help="The path to the MP3 file")
+    parser.add_argument('file_path', type=str, help="The path to the MP3 file, or a folder of mp3 files.")
     parser.add_argument('--convert-keys', '-c', action='store_true', help="Convert abbreviated musical keys (e.g. "
                                                                           "'Fmaj') to a certain medieval-themed notation system (e.g. '7B').")
-    parser.add_argument('--strip-pii', '-s', action='store_true', help="Strip tags from Beatport containing "
+    parser.add_argument('--strip-ufid', '-s', action='store_true', help="Strip tags from Beatport containing "
                                                                        "identifying information.")
-
     args = parser.parse_args()
 
-    rebuild_id3_tags(args.file_path,
-                     convert_keys=args.convert_keys,
-                     strip_ufid=args.strip_ufid)
+    all_files = get_mp3_files(args.file_path)
+
+    for file_path in all_files:
+        rebuild_id3_tags(file_path,
+                         convert_keys=args.convert_keys,
+                         strip_ufid=args.strip_ufid)
