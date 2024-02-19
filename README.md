@@ -1,5 +1,7 @@
 # MP3TagRebuilder
 
+#### Version 0.1
+
 MP3TagRebuilder is a python script designed to fix a very specific type of corrupted MP3 ID3 tag that seems to appear rather often with purchases from Beatport.
 
 This particular defect somehow prevents Serato from saving track, key, and BPM analyses to the MP3's ID3 header. When this happens, Serato will seemingly analyze the MP3 file perfectly fine, but then when it is reloaded, analysis isn't present (notice how the track overview fills in slowly from left-to-right, as opposed to appearing instantly), and the data in the BPM and Key columns revert to the previous values provided by Beatport.
@@ -40,6 +42,10 @@ To rebuild the tags for a single file, run the following:
 `python mp3-tag-rebuilder.py /path/to/a_file.mp3`, replacing "/path/to/a_file.mp3" with your own file path.
 
 If there is a space in the file path, don't forget to enclose it in quotes! For example: `python mp3-tag-rebuilder.py "G:\temp\testmedialibrary\13199930_Stutter_(Original Mix).mp3"`
+
+### Rebuild Tags for a Folder of MP3 files:
+
+You can pass mp3-tag-rebuilder a path to a folder, instead of mp3 files. It will then operate on any MP3 file in the given folder. (Note that this is NOT a recursive search; subfolders will not be processed.) 
 
 ## Note About Tracks Already Imported to Serato
 

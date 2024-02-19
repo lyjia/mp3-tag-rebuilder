@@ -2,7 +2,7 @@ import argparse, os, glob
 from mutagen.id3 import ID3, error, ID3NoHeaderError
 from mutagen.mp3 import MP3
 
-VERSION = '0.0'
+VERSION = '0.1'
 
 medieval_system = {
     '1A': 'Abm',
