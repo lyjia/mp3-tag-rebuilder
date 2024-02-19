@@ -37,7 +37,7 @@ def log(msg):
     print(msg)
 
 
-def rebuild_id3_tags(file_path, convert_keys=False, strip_pii=False):
+def rebuild_id3_tags(file_path, convert_keys=False, strip_ufid=False):
     try:
         audio = MP3(file_path, ID3=ID3)
     except ID3NoHeaderError:
@@ -53,7 +53,7 @@ def rebuild_id3_tags(file_path, convert_keys=False, strip_pii=False):
                 log(f"Converting {tag}: {value.text[0]} --> {newval}...")
                 value.text = [newval]
 
-        if strip_pii:
+        if strip_ufid:
             if tag=="UFID":
                 log(f"Stripping {tag}...")
                 continue
@@ -83,4 +83,4 @@ if __name__ == "__main__":
 
     rebuild_id3_tags(args.file_path,
                      convert_keys=args.convert_keys,
-                     strip_pii=args.strip_pii)
+                     strip_ufid=args.strip_ufid)
