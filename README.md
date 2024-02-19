@@ -1,6 +1,6 @@
 # MP3TagRebuilder
 
-MP3TagRebuilder is a python script that fixes a very specific type of corrupted MP3 ID3 tag that seems to appear rather often with purchases from Beatport.
+MP3TagRebuilder is a python script designed to fix a very specific type of corrupted MP3 ID3 tag that seems to appear rather often with purchases from Beatport.
 
 This particular defect somehow prevents Serato from saving track, key, and BPM analyses to the MP3's ID3 header. When this happens, Serato will seemingly analyze the MP3 file perfectly fine, but then when it is reloaded, analysis isn't present (notice how the track preview fills in slowly from left-to-right, as opposed to appearing instantly), and the data in the BPM and Key columns revert to the previous values provided by Beatport.
 
@@ -37,7 +37,20 @@ To rebuild the tags for a single file, run the following:
 
 `python mp3-tag-rebuilder.py /path/to/a_file.mp3`, replacing "/path/to/a_file.mp3" with your own file path.
 
-## NOTE:
+## Note About Tracks Already Imported to Serato
+
+Serato seems to cache ID3 tags to an internal database and seems to use that to accelerate track display in the file browser. It will not re-read ID3 tags until a given track is selected and cued, and it doesn't seem to update its internal database with this information.
+
+Rather frustratingly, the data it caches seems to also carry this corruption and it will ignore new ID3 data even if you re-run analysis, which will make it seem as if this script does nothing. 
+
+The only way I've figured out to get Serato to purge this cache is to make it think the file is deleted, after which Serato forget any information it has saved on it.
+
+To do this workaround:
+
+1. Process the file with MP3TagRebuilder per the instructions above.
+1. Rename the file on your filesystem (from something like 'mysong.mp3' to 'mysong2.mp3', then cue it up in Serato. This will cause Serato to think the file is missing, and it deletes its cache for that file. The file will display as yellow with just its filename in Serato's file browser. 
+1. Then, rename the file back to its original filename and cue it up again. Serato will perform its analysis and save the updated ID3 tags to its cache.
+1. Subsequent uses of the given track will behave as expected, with the track preview appearing instantly and all metadata being correct.
 
 ## License:
 
