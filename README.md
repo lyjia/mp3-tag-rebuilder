@@ -4,7 +4,7 @@
 
 MP3TagRebuilder is a python script designed to fix a very specific type of corrupted MP3 ID3 tag that seems to appear rather often with purchases from Beatport.
 
-This particular defect somehow prevents Serato from saving track, key, and BPM analyses to the MP3's ID3 header. When this happens, Serato will seemingly analyze the MP3 file perfectly fine, but then when it is reloaded, analysis isn't present (notice how the track overview fills in slowly from left-to-right, as opposed to appearing instantly), and the data in the BPM and Key columns revert to the previous values provided by Beatport.
+This particular defect somehow prevents Serato from saving track, key, and BPM analyses to the MP3's ID3 header. When this happens, Serato will seemingly analyze the MP3 file perfectly fine, but then when it is reloaded, analysis isn't present (notice how the track overview fills in slowly from left-to-right, as opposed to appearing instantly), and the data in the BPM and Key columns revert to the previous values provided by Beatport. (This is especially noticeable for some genres like Drum & Bass, where the supplied BPM value is very often wrong.)
 
 You may find this script useful if you need to rebuild an MP3 file's ID3 tags from scratch, keeping the data but not the datastructure, for whatever reason. It is a feature that seems to be missing from most technically-oriented music players and tag editors, including Foobar2000 and Mp3Tag.  
 
