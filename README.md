@@ -81,3 +81,5 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 ## Credits:
 
 Shout out to ChatGPT for providing the initial skeleton of this code. I've since made some modifications :)
+
+Tag manipulations provided by [mutagen](https://mutagen.readthedocs.io/en/latest/#)
