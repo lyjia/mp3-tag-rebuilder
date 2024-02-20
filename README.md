@@ -2,7 +2,7 @@
 
 **NOTICE:** I am currently testing this script with a limited subset of my total music collection. I will update this when I feel comfortable running it against all potentially corrupted files that I have (hundreds of MP3's) and/or my entire DJ music collection (thousands of MP3s) 
 
-#### Version 0.2.1
+#### Version 0.2.1 
 
 MP3TagRebuilder is a python script designed to fix a very specific type of corrupted MP3 ID3 tag that seems to appear rather often with purchases from Beatport.
 
@@ -70,7 +70,7 @@ If you can think of a better way to do this, please let me know!
 
 The MIT License
 
-Copyright © 2010-2016 Mitchell Hashimoto
+Copyright 2024 Lyjia
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
