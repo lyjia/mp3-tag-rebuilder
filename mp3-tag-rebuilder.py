@@ -1,4 +1,4 @@
-import argparse, os, glob
+import argparse, os, glob, time
 from mutagen.id3 import ID3, error, ID3NoHeaderError, COMM, TKEY, UFID
 from mutagen.mp3 import MP3
 
@@ -82,6 +82,7 @@ def rebuild_id3_tags(file_path, convert_key=False, strip_ufid=False):
     audio.delete()  # Remove existing tags
     audio.save()  # Save the changes
     log(f"Destroyed existing ID3 tags for {file_path}")
+    time.sleep(1) # wait for the filesystem to catch up
 
     audio.tags = new_tags  # Assign new tags
     audio.save()  # Save the changes
