@@ -2,7 +2,7 @@ import argparse, os, glob, time
 from mutagen.id3 import ID3, error, ID3NoHeaderError, COMM, TKEY, UFID
 from mutagen.mp3 import MP3
 
-VERSION = '0.2'
+VERSION = '0.2.1'
 
 medieval_system = {
     '1A': ['Abmin', 'G#min', 'Abm', 'G#m'],
