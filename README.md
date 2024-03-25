@@ -19,6 +19,8 @@ This script has some additional features that I have added, which are not necess
 
 This script DESTRUCTIVELY modifies files that are passed to it! It could potentially screw up your mp3 files or your DJ software's database! *YOU* are responsible for any damage suffered as a result of its use! YOU'VE BEEN WARNED!!!
 
+**DO NOT RUN THIS SCRIPT ON FILES ON NAS OR A NETWORK DRIVE WITHOUT MAKING BACKUPS FIRST!** I have spotted an issue that occurs while operating on files stored on a network drive, where the ID3 tag will be destroyed (and the information lost) without being recreated. This occurs sporadically and may or may not affect you. If this happens the script will crash before the ID3 data is rewritten.
+
 **USE THIS SOFTWARE AT YOUR OWN RISK!** See the License section below for more information.
 
 ## How to Use
